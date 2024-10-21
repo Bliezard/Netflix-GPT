@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../Utils/constants";
 import { addTrailerVideo } from "../Utils/moviesSlice";
 
 const useMovieTrailer = (movieId) => {
   const dispatch = useDispatch();
+
+  const trailerVideo = useSelector(store => store.movies.trailerVideo)
 
   //Fetching the trailer vedio and updating the store with trailer vedio data
 
@@ -26,7 +28,7 @@ const useMovieTrailer = (movieId) => {
   };
 
   useEffect(() => {
-    getMovieVedios();
+   !trailerVideo && getMovieVedios();
   }, []);
 };
 
